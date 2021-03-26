@@ -10,12 +10,12 @@ def isolate(fn_isolation):
     pass
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def token(WallToken, accounts):
     return WallToken.deploy({'from': accounts[0]})
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def registered_token(token, accounts):
     token.register(accounts[0], {
         "from": accounts[1], 
@@ -25,7 +25,7 @@ def registered_token(token, accounts):
     return token
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def with_format_token(token, accounts):
     token.addFormat("html", {"from": accounts[0]})
 

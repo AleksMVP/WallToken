@@ -114,6 +114,8 @@ contract WallToken is ERC20, Ownable {
     function addFormat(string memory format) external onlyOwner {
         require(!supported_formats[format], "Format already added");
         supported_formats[format] = true;
+
+        emit FormatAdded(format);
     }
 
     function setCurrentPrice(uint price) external onlyOwner {
@@ -143,6 +145,9 @@ contract WallToken is ERC20, Ownable {
         _mint(who, token_to_mint);
         who.transfer(remainder);
     }
+
+    // Called when new format added
+    event FormatAdded(string format);
 
     // Called when new user registered 
     event UserRegistered(address user);
